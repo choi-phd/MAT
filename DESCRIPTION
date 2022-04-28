@@ -6,8 +6,8 @@ Date: 2022-04-28
 Author: Seung W. Choi and David R. King
 Maintainer: Seung W. Choi <schoi@austin.utexas.edu>
 Description: Simulates Multidimensional Adaptive Testing using the multidimensional three-parameter logistic model.
-License: GPL (>= 2)
-Imports: Rcpp (>= 0.11.2), methods
+License: GPL (>= 2.10)
+Imports: Rcpp (>= 1.0.0), methods
 LinkingTo: Rcpp, RcppArmadillo
 LazyLoad: yes
 NeedsCompilation: yes
