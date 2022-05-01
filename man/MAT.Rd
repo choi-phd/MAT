@@ -9,20 +9,20 @@
 }
 \usage{
   MAT(ipar, resp, cors,
-      target.content.dist = NULL, content.cat = NULL, ncc = 1, 
-      content.order = NULL, p = stop("p is required"), 
-      selectionMethod = c("D", "A", "C", "R"), 
-      selectionType = c("FISHER", "BAYESIAN"), c.weights = NA, 
-      stoppingCriterion = c("CONJUNCTIVE", "COMPENSATORY"), 
-      topN = 1, minNI = 10, maxNI = 30, minSE = 0.3, D = 1, 
-      maxIter = 30, conv = 0.001, minTheta = -4, maxTheta = 4, 
-      plot.audit.trail = T, theta.labels = NULL, easiness=T)
+      target.content.dist = NULL, content.cat = NULL, ncc = 1,
+      content.order = NULL, p = stop("p is required"),
+      selectionMethod = c("D", "A", "C", "R"),
+      selectionType = c("FISHER", "BAYESIAN"), c.weights = NA,
+      stoppingCriterion = c("CONJUNCTIVE", "COMPENSATORY"),
+      topN = 1, minNI = 10, maxNI = 30, minSE = 0.3, D = 1,
+      maxIter = 30, conv = 0.001, minTheta = -4, maxTheta = 4,
+      plot.audit.trail = TRUE, theta.labels = NULL, easiness = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ipar}{a data frame containing M3PL item parameters, specifically a1, a2, ... , d, and c}
   \item{resp}{a data frame (that will be converted to a numeric matrix) of item responses, e.g., R1, R2, ..., R180}
-  \item{cors}{a square matrix of the lower diagonal elements of a variance-covariance (VCV) matrix, 
+  \item{cors}{a square matrix of the lower diagonal elements of a variance-covariance (VCV) matrix,
    including 1's in the main diagonal}
   \item{target.content.dist}{an optional vector of target content distributions summed to 1.0, e.g., c(0.25,0.5,0.25)}
   \item{content.cat}{an optional vector specifying content designations}
@@ -50,7 +50,7 @@
 \details{
   The purpose of this function is to simulate multidimensional adaptive testing based on the Multidimensional 3-Parameter Logistic (M3PL) model (Reckase, 2009):
   \deqn{P_i(\theta) \equiv P(U_i = 1|\boldsymbol{\theta}, \mathbf{a}_i, d_i, c_i) \equiv c_i + \frac{1-c_i}{1 + exp[-D(\mathbf{a}_i\cdot\boldsymbol{\theta} + d_i)]}}
-  where \eqn{\mathbf{a}_i} is a vector of discrimination parameters of item \emph{i}, \eqn{\boldsymbol{\theta}} is a vector of abilities, \eqn{c_i} is a scalar representing the 
+  where \eqn{\mathbf{a}_i} is a vector of discrimination parameters of item \emph{i}, \eqn{\boldsymbol{\theta}} is a vector of abilities, \eqn{c_i} is a scalar representing the
   guessing parameter of item \emph{i}, \eqn{d_i} is a scalar representing the easiness of item \emph{i}.
   Thetas are estimated using the Bayesian maximum a posteriori (MAP) estimator and the Fisher scoring method. Three item
   selection criteria are available: D-optimality, A-optimality, and C-optimality (Segall, 1996; van der Linden, 1999;
@@ -77,7 +77,7 @@
 }
 \note{
 \enumerate{
-  \item The MAT function performs a number of checks to determine if the arguments for content balancing and content ordering have been specified correctly. If the arguments have not been specified correctly, content balancing and/or content ordering will not be used for the simulation. Additionally, a warning message will be printed to the console detailing the misspecification.  
+  \item The MAT function performs a number of checks to determine if the arguments for content balancing and content ordering have been specified correctly. If the arguments have not been specified correctly, content balancing and/or content ordering will not be used for the simulation. Additionally, a warning message will be printed to the console detailing the misspecification.
   \item Content ordering is only available for fixed-length CAT. Namely, to invoke a particular content order, the user must set the minimum number of items equal to the maximum number of items (e.g., minNI=30 & maxNI=30).
 }
 }
