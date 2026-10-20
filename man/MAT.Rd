@@ -16,7 +16,8 @@
       stoppingCriterion = c("CONJUNCTIVE", "COMPENSATORY"),
       topN = 1, minNI = 10, maxNI = 30, minSE = 0.3, D = 1,
       maxIter = 30, conv = 0.001, minTheta = -4, maxTheta = 4,
-      plot.audit.trail = TRUE, theta.labels = NULL, easiness = TRUE)
+      plot.audit.trail = TRUE, theta.labels = NULL, easiness = TRUE,
+      plot.summary = plot.audit.trail)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -45,6 +46,7 @@
   \item{plot.audit.trail}{show CAT audit trail: T or F (default=T)}
   \item{theta.labels}{theta labels for plotting (default=c("Theta 1","Theta 2",...))}
   \item{easiness}{logical, T if d is related to the \emph{easiness} of items per Reckase, F otherwise}
+  \item{plot.summary}{logical, draw the summary plots (CAT vs. full-bank thetas and, with content balancing, the content distribution) after the simulation; defaults to the value of \code{plot.audit.trail}, so \code{plot.audit.trail = FALSE} opens no graphics windows}
 }
 
 \details{
@@ -94,9 +96,6 @@
 }
 \author{
   Seung W. Choi and David R. King
-}
-\note{
-  requires \pkg{MASS}
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

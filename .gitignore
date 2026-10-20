@@ -39,3 +39,8 @@ vignettes/*.pdf
 .Renviron
 .Rbuildignore
 .DS_Store
+
+# Compiled code
+src/*.o
+src/*.so
+src/*.dll

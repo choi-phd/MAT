@@ -8,16 +8,6 @@ Multidimensional Adaptive Testing (MAT)
   MAT is a package to simulate Multidimensional Adaptive Testing (MAT) for the Multidimensional
   3-Parameter Logistic (M3PL) Model  as described in Segall (1996), Reckase (2009), and Mulder & van der Linden (2009).
 }
-\details{
-\tabular{ll}{
-Package: \tab MAT\cr
-Type: \tab Package\cr
-Version: \tab 2.0\cr
-Date: \tab 2011-01-25\cr
-License: \tab GPL \cr
-LazyLoad: \tab yes\cr
-}
-}
 \author{
 Seung W. Choi and David R. King
 

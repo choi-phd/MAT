@@ -43,7 +43,7 @@ simM3PL <-
     TH <- matrix(rnorm(n.simulee * p), n.simulee, p)
     random <- matrix(runif(n.simulee * ni), n.simulee, ni)
 
-    if (all(sigma != 0) && p > 1)
+    if (p > 1)
       TH <- TH %*% chol(sigma)
 
     resp <- matrix(0, n.simulee, ni)

@@ -22,7 +22,8 @@ MAT <-
            maxTheta = 4,
            plot.audit.trail = TRUE,
            theta.labels = NULL,
-           easiness = TRUE) {
+           easiness = TRUE,
+           plot.summary = plot.audit.trail) {
 
     call <- match.call()
 
@@ -107,7 +108,7 @@ MAT <-
           "ERROR: content categories are duplicated in content.order\n:content ordering will not be used"
         )
       } else if (any(content.order < 1) |
-                 any(content.order > p)) {
+                 any(content.order > ncc)) {
         content.order <- NULL
         warning(
           "ERROR: content categories are out of range in content.order\n: must specify content categories as integers
@@ -255,10 +256,9 @@ MAT <-
 
         info[!available] <- NA
 
-        info.index <- rev(order(info))
-        if (topN > 1 &&
-            sum(items.available) > topN) {
-          item.selected <- info.index[sample(topN, 1)]
+        info.index <- order(info, decreasing = TRUE, na.last = NA)  # available items only, best first
+        if (topN > 1 && length(info.index) > 1) {
+          item.selected <- info.index[sample(min(topN, length(info.index)), 1)]
         } else {
           item.selected = which(info == max(info, na.rm = T))[1]
         }
@@ -420,7 +420,7 @@ MAT <-
       }
     }
 
-    if (content.balancing) {
+    if (content.balancing && plot.summary) {
       overall.content.dist <- overall.content.freq / sum(overall.content.freq)
       content.dist <- rbind(target.content.dist, overall.content.dist)
       par.mar <- par()$mar
@@ -443,24 +443,29 @@ MAT <-
       par(xpd = F, mar = par.mar)
     }
 
-    dev.new(record = T,
-            width = 10,
-            height = 6.5)
-    par(mfrow = c(2, 3))
-    for (h in 1:p) {
-      plot(
-        estimates.full$theta[, h],
-        theta.CAT[, h],
-        xlim = c(minTheta, maxTheta),
-        ylim = c(minTheta, maxTheta),
-        xlab = paste("Full Bank", theta.labels[h]),
-        ylab = paste("CAT Theta", theta.labels[h]),
-        col = "blue"
-      )
-      text(minTheta, maxTheta, paste("r =", sprintf(
-        "%5.3f", cor(estimates.full$theta[, h], theta.CAT[, h])
-      )), adj = 0)
-      abline(0, 1)
+    if (plot.summary) {
+      dev.new(record = T,
+              width = 10,
+              height = 6.5)
+      par(mfrow = c(2, 3))
+      for (h in 1:p) {
+        plot(
+          estimates.full$theta[, h],
+          theta.CAT[, h],
+          xlim = c(minTheta, maxTheta),
+          ylim = c(minTheta, maxTheta),
+          xlab = paste("Full Bank", theta.labels[h]),
+          ylab = paste("CAT Theta", theta.labels[h]),
+          col = "blue"
+        )
+        r.text <- if (nj > 1) {
+          sprintf("%5.3f", cor(estimates.full$theta[, h], theta.CAT[, h]))
+        } else {
+          "NA"
+        }
+        text(minTheta, maxTheta, paste("r =", r.text), adj = 0)
+        abline(0, 1)
+      }
     }
 
     out <-
